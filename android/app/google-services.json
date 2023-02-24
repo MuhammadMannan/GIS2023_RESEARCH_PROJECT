@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052831909854",
+    "project_id": "uw-gis-project",
+    "storage_bucket": "uw-gis-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052831909854:android:c4fbd184b769d02731ff4f",
+        "android_client_info": {
+          "package_name": "com.example.gis_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052831909854-odum1089hv5fmk8387fv1f5fc74ojo50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpaA0RyF5995-o3_7X73EsBMW9LqbJ3Bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052831909854-odum1089hv5fmk8387fv1f5fc74ojo50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
