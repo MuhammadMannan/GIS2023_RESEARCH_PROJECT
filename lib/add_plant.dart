@@ -24,6 +24,14 @@ class _MyAddPlant extends State<AddPlant> {
   String _latitude = '';
   String _longitude = '';
 
+  late DateTime _date;
+
+  @override
+  void initState() {
+    super.initState();
+    _date = DateTime.now();
+  }
+
   Future<void> _getCurrentLocation() async {
     final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -105,7 +113,8 @@ class _MyAddPlant extends State<AddPlant> {
                               'description': description,
                               'latitude': _latitude,
                               'longitude': _longitude,
-                              'plant name': name
+                              'plant name': name,
+                              'date': _date
                             })
                             .then((value) => print('user entered data'))
                             .catchError((error) =>
