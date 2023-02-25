@@ -83,17 +83,7 @@ class _MyAddPlant extends State<AddPlant> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        final String name = _speciesController.text;
-                        final String description = _descriptionController.text;
                         _getCurrentLocation();
-                        plants
-                            .add({
-                              'description': description,
-                              'plant name': name
-                            })
-                            .then((value) => print('user entered data'))
-                            .catchError((error) =>
-                                print('Error adding document: $error'));
                       }
                     },
                     child: Text('Get Location'),
@@ -102,6 +92,30 @@ class _MyAddPlant extends State<AddPlant> {
               ),
               Center(child: Text('Latitude: $_latitude')),
               Center(child: Text('Longitude: $_longitude')),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        final String name = _speciesController.text;
+                        final String description = _descriptionController.text;
+                        plants
+                            .add({
+                              'description': description,
+                              'latitude': _latitude,
+                              'longitude': _longitude,
+                              'plant name': name
+                            })
+                            .then((value) => print('user entered data'))
+                            .catchError((error) =>
+                                print('Error adding document: $error'));
+                      }
+                    },
+                    child: Text('Submit Data'),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
