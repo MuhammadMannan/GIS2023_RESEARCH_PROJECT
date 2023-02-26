@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
+import 'package:intl/intl.dart';
 
 class AddPlant extends StatefulWidget {
   const AddPlant({super.key});
@@ -21,8 +22,8 @@ class _MyAddPlant extends State<AddPlant> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _speciesController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  String _latitude = '';
-  String _longitude = '';
+  double _latitude = 0.0;
+  double _longitude = 0.0;
 
   late DateTime _date;
 
@@ -36,8 +37,8 @@ class _MyAddPlant extends State<AddPlant> {
     final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
-      _latitude = position.latitude.toString();
-      _longitude = position.longitude.toString();
+      _latitude = position.latitude;
+      _longitude = position.longitude;
     });
   }
 
@@ -123,6 +124,39 @@ class _MyAddPlant extends State<AddPlant> {
                     },
                     child: Text('Submit Data'),
                   ),
+                ),
+              ),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: plants.snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final List<DocumentSnapshot> documents =
+                        snapshot.data!.docs;
+                    return ListView.builder(
+                      itemCount: documents.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final document = documents[index];
+                        final date = (document['date'] as Timestamp).toDate();
+                        final formattedDate = DateFormat.yMd().format(date);
+                        final double latitude = document['latitude'];
+                        final double longitude = document['longitude'];
+                        return ListTile(
+                            title: Text(document['plant name']),
+                            subtitle: Text(document['description']),
+                            trailing: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(formattedDate),
+                                Text('Lat: $latitude, Long: $longitude'),
+                              ],
+                            ));
+                      },
+                    );
+                  },
                 ),
               ),
             ],

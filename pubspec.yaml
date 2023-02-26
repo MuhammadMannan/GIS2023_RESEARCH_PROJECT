@@ -39,6 +39,8 @@ dependencies:
   firebase_core: ^2.7.0
   geolocator: ^9.0.2
   permission_handler: ^10.2.0
+  location: ^4.2.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
