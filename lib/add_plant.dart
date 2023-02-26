@@ -35,12 +35,26 @@ class _MyAddPlant extends State<AddPlant> {
   }
 
   Future<void> _getCurrentLocation() async {
-    final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    final position = await _determinePosition();
     setState(() {
       _latitude = position.latitude.toDouble();
       _longitude = position.longitude.toDouble();
     });
+  }
+
+  Future<Position> _determinePosition() async {
+    LocationPermission permission;
+
+    permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location Permission dennied');
+      }
+    }
+
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
@@ -128,7 +142,6 @@ class _MyAddPlant extends State<AddPlant> {
                             builder: (context) => const ViewPlants()),
                       );
                     },
-                    //child: Text('View Plants'),
                     child: Text('Submit Data'),
                   ),
                 ),
