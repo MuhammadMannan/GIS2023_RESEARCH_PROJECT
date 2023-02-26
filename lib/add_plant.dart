@@ -38,8 +38,8 @@ class _MyAddPlant extends State<AddPlant> {
     final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
-      _latitude = position.latitude;
-      _longitude = position.longitude;
+      _latitude = position.latitude.toDouble();
+      _longitude = position.longitude.toDouble();
     });
   }
 
