@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
 import 'package:intl/intl.dart';
+import 'view_plants.dart';
 
 class AddPlant extends StatefulWidget {
   const AddPlant({super.key});
@@ -121,44 +122,30 @@ class _MyAddPlant extends State<AddPlant> {
                             .catchError((error) =>
                                 print('Error adding document: $error'));
                       }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ViewPlants()),
+                      );
                     },
+                    //child: Text('View Plants'),
                     child: Text('Submit Data'),
                   ),
                 ),
               ),
-              Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: plants.snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    final List<DocumentSnapshot> documents =
-                        snapshot.data!.docs;
-                    return ListView.builder(
-                      itemCount: documents.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final document = documents[index];
-                        final date = (document['date'] as Timestamp).toDate();
-                        final formattedDate = DateFormat.yMd().format(date);
-                        final double latitude = document['latitude'];
-                        final double longitude = document['longitude'];
-                        return ListTile(
-                            title: Text(document['plant name']),
-                            subtitle: Text(document['description']),
-                            trailing: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(formattedDate),
-                                Text('Lat: $latitude, Long: $longitude'),
-                              ],
-                            ));
-                      },
-                    );
-                  },
-                ),
-              ),
+              Center(
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ViewPlants()),
+                          );
+                        },
+                        child: Text('View Plants'),
+                      )))
             ],
           ),
         ),
