@@ -46,7 +46,7 @@ class _MyViewPlants extends State<ViewPlants> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(formattedDate),
-                    Text('Lat: $latitude, \nLong: $longitude'),
+                    Text('Lat: $latitude,\nLong: $longitude'),
                   ],
                 ),
               );
