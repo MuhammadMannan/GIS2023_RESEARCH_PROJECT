@@ -147,7 +147,7 @@ class _MyAddPlant extends State<AddPlant> {
                   ),
                 ),
               ),
-              Center(
+              /* Center(
                   child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: ElevatedButton(
@@ -159,10 +159,36 @@ class _MyAddPlant extends State<AddPlant> {
                           );
                         },
                         child: Text('View Plants'),
-                      )))
+                      ))) */
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: SizedBox.shrink(),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ViewPlants()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ViewPlants()),
+          );
+        },
+        child: Icon(Icons.list),
       ),
     );
   }

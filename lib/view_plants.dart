@@ -16,24 +16,54 @@ class ViewPlants extends StatefulWidget {
 }
 
 class _MyViewPlants extends State<ViewPlants> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
   CollectionReference plants = FirebaseFirestore.instance.collection('plants');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Species Information"),
+        title: TextField(
+          controller: _searchController,
+          onChanged: (query) {
+            setState(() {
+              _searchQuery = query.toLowerCase();
+            });
+          },
+          decoration: InputDecoration(
+            hintText: "Search Plants",
+            border: InputBorder.none,
+          ),
+        ),
+        //title: Text("Species Information"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: plants.snapshots(),
+        //stream: plants.snapshots(),
+        stream: plants.orderBy('date', descending: true).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
           final List<DocumentSnapshot> documents = snapshot.data!.docs;
+          List<DocumentSnapshot> filteredDocuments = documents;
+          if (_searchQuery.isNotEmpty) {
+            filteredDocuments = documents
+                .where((document) =>
+                    document['plant name']
+                        .toLowerCase()
+                        .contains(_searchQuery) ||
+                    document['description']
+                        .toLowerCase()
+                        .contains(_searchQuery))
+                .toList();
+          }
           return ListView.builder(
-            itemCount: documents.length,
+            //itemCount: documents.length,
+            itemCount: filteredDocuments.length,
             itemBuilder: (BuildContext context, int index) {
-              final document = documents[index];
+              //final document = documents[index];
+              final document = filteredDocuments[index];
               final date = (document['date'] as Timestamp).toDate();
               final formattedDate = DateFormat.yMd().format(date);
               final double latitude = document['latitude'];
@@ -53,6 +83,32 @@ class _MyViewPlants extends State<ViewPlants> {
           );
         },
       ),
+      /* floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddPlant()),
+          );
+        },
+        child: Icon(Icons.add),
+      ), */
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: SizedBox.shrink(),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ViewPlants()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
