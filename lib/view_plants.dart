@@ -23,6 +23,7 @@ class _MyViewPlants extends State<ViewPlants> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: TextField(
           controller: _searchController,
