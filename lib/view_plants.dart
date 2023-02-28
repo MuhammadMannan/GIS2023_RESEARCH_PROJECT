@@ -34,8 +34,10 @@ class _MyViewPlants extends State<ViewPlants> {
           },
           decoration: InputDecoration(
             hintText: "Search Plants",
+            hintStyle: TextStyle(color: Colors.white),
             border: InputBorder.none,
           ),
+          style: TextStyle(color: Colors.white),
         ),
         //title: Text("Species Information"),
       ),
