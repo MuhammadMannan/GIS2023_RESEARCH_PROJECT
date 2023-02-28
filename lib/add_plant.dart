@@ -57,7 +57,7 @@ class _MyAddPlant extends State<AddPlant> {
     }
 
     // Permission is still being requested, wait for a short delay and try again
-    await Future.delayed(Duration(milliseconds: 500));
+    //await Future.delayed(Duration(milliseconds: 500));
     return _getCurrentLocation();
   }
 
