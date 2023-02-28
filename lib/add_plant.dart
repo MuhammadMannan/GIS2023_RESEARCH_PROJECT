@@ -169,7 +169,7 @@ class _MyAddPlant extends State<AddPlant> {
                 },
               ), */
 
-              Center(
+              /* Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
@@ -181,7 +181,7 @@ class _MyAddPlant extends State<AddPlant> {
                     child: Text('Get Location'),
                   ),
                 ),
-              ),
+              ), */
               Center(child: Text('Latitude: $_latitude')),
               Center(child: Text('Longitude: $_longitude')),
               Center(
