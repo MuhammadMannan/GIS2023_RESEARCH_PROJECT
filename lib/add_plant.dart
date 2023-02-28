@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +34,7 @@ class _MyAddPlant extends State<AddPlant> {
     _getCurrentLocation();
   }
 
-  Future<Position> _getCurrentLocation() async {
+  /* Future<Position> _getCurrentLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
@@ -57,11 +56,11 @@ class _MyAddPlant extends State<AddPlant> {
     }
 
     // Permission is still being requested, wait for a short delay and try again
-    //await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 500));
     return _getCurrentLocation();
-  }
+  } */
 
-  /* Future<void> _getCurrentLocation() async {
+  Future<void> _getCurrentLocation() async {
     final position = await _determinePosition();
     setState(() {
       _latitude = position.latitude.toDouble();
@@ -82,7 +81,7 @@ class _MyAddPlant extends State<AddPlant> {
     }
 
     return await Geolocator.getCurrentPosition();
-  } */
+  }
 
   @override
   void dispose() {
@@ -129,7 +128,7 @@ class _MyAddPlant extends State<AddPlant> {
                   return null;
                 },
               ),
-              FutureBuilder<Position>(
+              /* FutureBuilder<Position>(
                 future: _getCurrentLocation(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -168,9 +167,9 @@ class _MyAddPlant extends State<AddPlant> {
                     );
                   }
                 },
-              ),
+              ), */
 
-              /* Center(
+              Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
@@ -182,9 +181,9 @@ class _MyAddPlant extends State<AddPlant> {
                     child: Text('Get Location'),
                   ),
                 ),
-              ), */
-              /* Center(child: Text('Latitude: $_latitude')),
-              Center(child: Text('Longitude: $_longitude')), */
+              ),
+              Center(child: Text('Latitude: $_latitude')),
+              Center(child: Text('Longitude: $_longitude')),
               Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),

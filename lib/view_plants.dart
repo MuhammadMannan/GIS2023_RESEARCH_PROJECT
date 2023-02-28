@@ -1,11 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:gis_app/add_plant.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'firebase_options.dart';
+import 'plant_details.dart';
 import 'package:intl/intl.dart';
 
 class ViewPlants extends StatefulWidget {
@@ -62,6 +58,38 @@ class _MyViewPlants extends State<ViewPlants> {
                 .toList();
           }
           return ListView.builder(
+            itemCount: filteredDocuments.length,
+            itemBuilder: (BuildContext context, int index) {
+              final document = filteredDocuments[index];
+              final date = (document['date'] as Timestamp).toDate();
+              final formattedDate = DateFormat.yMd().format(date);
+              final double latitude = document['latitude'];
+              final double longitude = document['longitude'];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PlantDetails(document: document),
+                    ),
+                  );
+                },
+                child: ListTile(
+                  title: Text(document['plant name']),
+                  subtitle: Text(document['description']),
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(formattedDate),
+                      Text('Lat: $latitude,\nLong: $longitude'),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+
+          /* return ListView.builder(
             //itemCount: documents.length,
             itemCount: filteredDocuments.length,
             itemBuilder: (BuildContext context, int index) {
@@ -83,7 +111,7 @@ class _MyViewPlants extends State<ViewPlants> {
                 ),
               );
             },
-          );
+          ); */
         },
       ),
       /* floatingActionButton: FloatingActionButton(
