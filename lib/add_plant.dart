@@ -182,7 +182,7 @@ class _MyAddPlant extends State<AddPlant> {
                   ),
                 ),
               ), */
-              Center(child: Text('Latitude: $_latitude')),
+              Center(child: Text('\nLatitude: $_latitude')),
               Center(child: Text('Longitude: $_longitude')),
               Center(
                 child: Padding(
