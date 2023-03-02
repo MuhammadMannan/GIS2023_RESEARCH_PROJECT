@@ -88,41 +88,8 @@ class _MyViewPlants extends State<ViewPlants> {
               );
             },
           );
-
-          /* return ListView.builder(
-            //itemCount: documents.length,
-            itemCount: filteredDocuments.length,
-            itemBuilder: (BuildContext context, int index) {
-              //final document = documents[index];
-              final document = filteredDocuments[index];
-              final date = (document['date'] as Timestamp).toDate();
-              final formattedDate = DateFormat.yMd().format(date);
-              final double latitude = document['latitude'];
-              final double longitude = document['longitude'];
-              return ListTile(
-                title: Text(document['plant name']),
-                subtitle: Text(document['description']),
-                trailing: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(formattedDate),
-                    Text('Lat: $latitude,\nLong: $longitude'),
-                  ],
-                ),
-              );
-            },
-          ); */
         },
       ),
-      /* floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddPlant()),
-          );
-        },
-        child: Icon(Icons.add),
-      ), */
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

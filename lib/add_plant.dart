@@ -34,32 +34,6 @@ class _MyAddPlant extends State<AddPlant> {
     _getCurrentLocation();
   }
 
-  /* Future<Position> _getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permission denied');
-      }
-    }
-
-    if (permission == LocationPermission.whileInUse ||
-        permission == LocationPermission.always) {
-      // Permission has been granted, get current location
-      try {
-        final position = await Geolocator.getCurrentPosition();
-        return position;
-      } catch (e) {
-        return Future.error('Error getting current position: $e');
-      }
-    }
-
-    // Permission is still being requested, wait for a short delay and try again
-    await Future.delayed(Duration(milliseconds: 500));
-    return _getCurrentLocation();
-  } */
-
   Future<void> _getCurrentLocation() async {
     final position = await _determinePosition();
     setState(() {
@@ -128,60 +102,6 @@ class _MyAddPlant extends State<AddPlant> {
                   return null;
                 },
               ),
-              /* FutureBuilder<Position>(
-                future: _getCurrentLocation(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final Position position = snapshot.data!;
-                    return Stack(
-                      children: [
-                        Container(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        Column(
-                          children: [
-                            Center(
-                                child:
-                                    Text('\nLatitude: ${position.latitude}')),
-                            Center(
-                                child:
-                                    Text('Longitude: ${position.longitude}')),
-                          ],
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('${snapshot.error}'),
-                    );
-                  } else {
-                    return Stack(
-                      children: [
-                        Container(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                    );
-                  }
-                },
-              ), */
-
-              /* Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _getCurrentLocation();
-                      }
-                    },
-                    child: Text('Get Location'),
-                  ),
-                ),
-              ), */
               Center(child: Text('\nLatitude: $_latitude')),
               Center(child: Text('Longitude: $_longitude')),
               Center(
@@ -214,19 +134,6 @@ class _MyAddPlant extends State<AddPlant> {
                   ),
                 ),
               ),
-              /* Center(
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ViewPlants()),
-                          );
-                        },
-                        child: Text('View Plants'),
-                      ))) */
             ],
           ),
         ),
