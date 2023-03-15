@@ -42,6 +42,10 @@ class _MyAddPlant extends State<AddPlant> {
     });
   }
 
+  Future<void> _updateLocation() async {
+    await _getCurrentLocation();
+  }
+
   Future<Position> _determinePosition() async {
     LocationPermission permission;
 
@@ -70,6 +74,12 @@ class _MyAddPlant extends State<AddPlant> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Species Information"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _updateLocation,
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
