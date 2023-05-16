@@ -19,9 +19,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Species App',
-      theme: ThemeData.dark(
-          //primarySwatch: Colors.green,
-          ),
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
       home: AddPlant(),
     );
   }
