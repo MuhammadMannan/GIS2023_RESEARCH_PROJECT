@@ -16,6 +16,7 @@ class _MyViewPlants extends State<ViewPlants> {
   String _searchQuery = '';
 
   CollectionReference plants = FirebaseFirestore.instance.collection('plants');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
