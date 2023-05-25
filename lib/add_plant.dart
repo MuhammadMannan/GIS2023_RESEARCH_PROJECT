@@ -2,10 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'firebase_options.dart';
-import 'package:intl/intl.dart';
 import 'view_plants.dart';
 
 class AddPlant extends StatefulWidget {
@@ -71,53 +67,89 @@ class _MyAddPlant extends State<AddPlant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 131, 227, 134),
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Species Information"),
+        backgroundColor: const Color.fromARGB(255, 131, 227, 134),
+        elevation: 0,
+        title: const Text("Species Information"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: _updateLocation,
           )
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              TextFormField(
-                controller: _speciesController,
-                decoration: InputDecoration(
-                  labelText: 'Name of Species',
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color.fromARGB(255, 214, 255, 192)),
+                child: TextFormField(
+                  controller: _speciesController,
+                  decoration: const InputDecoration(
+                      labelText: 'Name of Species',
+                      contentPadding: EdgeInsets.all(10),
+                      border: InputBorder.none),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the name of the species';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the name of the species';
-                  }
-                  return null;
-                },
               ),
-              TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Description',
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color.fromARGB(255, 214, 255, 192)),
+                child: TextFormField(
+                  controller: _descriptionController,
+                  decoration: const InputDecoration(
+                      labelText: 'Description',
+                      contentPadding: EdgeInsets.all(10),
+                      border: InputBorder.none),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a description';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
               ),
-              Center(child: Text('\nLatitude: $_latitude')),
-              Center(child: Text('Longitude: $_longitude')),
+              Center(
+                child: Text(
+                  '\nLatitude: $_latitude',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              Center(
+                child: Text(
+                  'Longitude: $_longitude',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700, color: Colors.white),
+                ),
+              ),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      elevation: 0, // Set elevation to 0 for a flat button
+                    ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         final String name = _speciesController.text;
@@ -140,7 +172,9 @@ class _MyAddPlant extends State<AddPlant> {
                             builder: (context) => const ViewPlants()),
                       );
                     },
-                    child: Text('Submit Data'),
+                    child: const Text(
+                      'Submit Data',
+                    ),
                   ),
                 ),
               ),
@@ -149,11 +183,13 @@ class _MyAddPlant extends State<AddPlant> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 131, 227, 134),
+        elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: SizedBox.shrink(),
+              icon: const SizedBox.shrink(),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -166,13 +202,16 @@ class _MyAddPlant extends State<AddPlant> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        elevation: 0,
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const ViewPlants()),
           );
         },
-        child: Icon(Icons.list),
+        child: const Icon(
+          Icons.list,
+        ),
       ),
     );
   }

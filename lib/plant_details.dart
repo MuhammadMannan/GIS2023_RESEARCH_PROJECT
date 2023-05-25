@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class PlantDetails extends StatelessWidget {
   final DocumentSnapshot document;
 
-  const PlantDetails({required this.document});
+  const PlantDetails({super.key, required this.document});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +25,17 @@ class PlantDetails extends StatelessWidget {
           children: [
             Text(
               document['description'],
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Date: $formattedDate',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Location: Lat: $latitude, Long: $longitude',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

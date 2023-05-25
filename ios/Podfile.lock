@@ -762,7 +762,7 @@ DEPENDENCIES:
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
@@ -801,7 +801,7 @@ EXTERNAL SOURCES:
   open_file:
     :path: ".symlinks/plugins/open_file/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
@@ -833,6 +833,6 @@ SPEC CHECKSUMS:
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
 
-PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+PODFILE CHECKSUM: bab9a86af61c6a5f08b5335e1f949ed035d1948b
 
 COCOAPODS: 1.11.3

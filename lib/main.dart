@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: AddPlant(),
+      home: const AddPlant(),
     );
   }
 }

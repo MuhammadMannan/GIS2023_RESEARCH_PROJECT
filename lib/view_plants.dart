@@ -29,12 +29,12 @@ class _MyViewPlants extends State<ViewPlants> {
               _searchQuery = query.toLowerCase();
             });
           },
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "Search Plants",
             hintStyle: TextStyle(color: Colors.white),
             border: InputBorder.none,
           ),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         //title: Text("Species Information"),
       ),
@@ -96,7 +96,7 @@ class _MyViewPlants extends State<ViewPlants> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: SizedBox.shrink(),
+              icon: const SizedBox.shrink(),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -115,7 +115,7 @@ class _MyViewPlants extends State<ViewPlants> {
             MaterialPageRoute(builder: (context) => const AddPlant()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
