@@ -51,7 +51,7 @@ class _MyAddPlant extends State<AddPlant> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location Permission dennied');
+        return Future.error('Location Permission denied');
       }
     }
 
@@ -174,7 +174,7 @@ class _MyAddPlant extends State<AddPlant> {
                       );
                     },
                     child: const Text(
-                      'Submit Data',
+                      'Submit Data', style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
