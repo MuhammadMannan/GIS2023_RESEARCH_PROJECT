@@ -16,6 +16,7 @@ class PlantDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(document['plant name']),
       ),
       body: Padding(
@@ -25,6 +26,16 @@ class PlantDetails extends StatelessWidget {
           children: [
             Text(
               document['description'],
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              document['height'],
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              document['diameter'],
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 16),

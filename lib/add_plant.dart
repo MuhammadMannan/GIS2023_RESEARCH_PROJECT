@@ -6,10 +6,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'view_plants.dart';
 
 class AddPlant extends StatefulWidget {
-  const AddPlant({super.key});
+  const AddPlant({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   State<AddPlant> createState() => _MyAddPlant();
 }
 
@@ -19,6 +18,8 @@ class _MyAddPlant extends State<AddPlant> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _speciesController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _diameterController = TextEditingController();
   double _latitude = 0.0;
   double _longitude = 0.0;
 
@@ -62,6 +63,8 @@ class _MyAddPlant extends State<AddPlant> {
   void dispose() {
     _speciesController.dispose();
     _descriptionController.dispose();
+    _heightController.dispose();
+    _diameterController.dispose();
     super.dispose();
   }
 
@@ -127,6 +130,76 @@ class _MyAddPlant extends State<AddPlant> {
                   },
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              // Text box for describing how to measure the height
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color.fromARGB(255, 214, 255, 192),
+                ),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Tree Height is the vertical distance between the base of the tree and the tip of the highest branch on the tree.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    TextFormField(
+                      controller: _heightController,
+                      decoration: const InputDecoration(
+                        labelText: 'Height Measurement (Feet)',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the height';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(
+                height: 10,
+              ),
+              // Text box for describing how to measure the diameter
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color.fromARGB(255, 214, 255, 192),
+                ),
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Diameter of the trunk at a standard height of 4.5 ft from the base of the trunk.',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    TextFormField(
+                      controller: _diameterController,
+                      decoration: const InputDecoration(
+                        labelText: 'Diameter Measurement (Inches)',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the diameter';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
               Center(
                 child: Text(
                   '\nLatitude: $_latitude',
@@ -155,9 +228,15 @@ class _MyAddPlant extends State<AddPlant> {
                       if (_formKey.currentState!.validate()) {
                         final String name = _speciesController.text;
                         final String description = _descriptionController.text;
+                        final double height =
+                            double.parse(_heightController.text);
+                        final double diameter =
+                            double.parse(_diameterController.text);
                         plants
                             .add({
                               'description': description,
+                              'diameter': diameter,
+                              'height': height,
                               'latitude': _latitude,
                               'longitude': _longitude,
                               'plant name': name,
@@ -174,7 +253,7 @@ class _MyAddPlant extends State<AddPlant> {
                       );
                     },
                     child: const Text(
-                      'Submit Data', style: TextStyle(fontWeight: FontWeight.bold),
+                      'Submit Data',
                     ),
                   ),
                 ),

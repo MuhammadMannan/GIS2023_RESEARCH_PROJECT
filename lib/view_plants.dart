@@ -22,6 +22,7 @@ class _MyViewPlants extends State<ViewPlants> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        elevation: 0,
         title: TextField(
           controller: _searchController,
           onChanged: (query) {
@@ -66,6 +67,7 @@ class _MyViewPlants extends State<ViewPlants> {
               final formattedDate = DateFormat.yMd().format(date);
               final double latitude = document['latitude'];
               final double longitude = document['longitude'];
+
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -77,7 +79,15 @@ class _MyViewPlants extends State<ViewPlants> {
                 },
                 child: ListTile(
                   title: Text(document['plant name']),
-                  subtitle: Text(document['description']),
+                  subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'Diameter: ${document['diameter'].toString()}  Height: ${document['height'].toString()}'),
+                      Text('Description: ${document['description']}')
+                    ],
+                  ),
                   trailing: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
